@@ -4,7 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f4efe6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="知識花園">
 <meta name="description" content="個人知識花園：收集知識，慢慢成長。">
+<link rel="icon" type="image/png" href="./icon.png">
+<link rel="apple-touch-icon" sizes="512x512" href="./icon.png">
 <title>我的知識花園</title>
 <style>
 :root{--bg:#f4efe6;--paper:#fffdf8;--ink:#344238;--muted:#777b70;--sage:#a8b5a2;--sage-dark:#52664c;--blue:#d9e3ed;--blue-dark:#4b647d;--rose:#e8d8d1;--rose-dark:#936d62;--lilac:#ddd8e8;--lilac-dark:#74658d;--line:#e6e0d6;--shadow:0 8px 24px rgba(77,76,61,.08);--radius:22px}
@@ -16,12 +21,67 @@
 .panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:19px;margin-top:14px;box-shadow:var(--shadow)}.panel h2{font-size:24px;margin:0 0 4px}.hint{color:var(--muted);font-size:14px;margin:0 0 16px}.row{display:flex;gap:9px;align-items:center}.row>*{min-width:0}.field{width:100%;padding:12px 13px;border:1px solid #dcd8cf;border-radius:13px;background:#fffefa;color:var(--ink);font-size:16px}.field+ .field{margin-top:9px}textarea.field{min-height:105px;resize:vertical}.primary{background:#879b7e;color:white;border-radius:13px;padding:12px 16px;font-weight:700}.secondary{background:#eee9df;color:var(--ink);border-radius:12px;padding:10px 13px}.danger{background:#f3e1dc;color:#874e43;border-radius:11px;padding:8px 10px;font-size:14px}.list{display:grid;gap:9px;margin-top:15px}.item{border:1px solid var(--line);border-radius:15px;padding:13px;background:#fffefa}.item-title{font-weight:700;font-size:17px;overflow-wrap:anywhere}.item-meta{font-size:13px;color:var(--muted);margin-top:3px}.item-body{white-space:pre-wrap;overflow-wrap:anywhere;margin-top:8px}.item-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.empty{padding:23px;text-align:center;color:var(--muted);background:#f8f4ec;border-radius:15px}.checkrow{display:flex;align-items:flex-start;gap:10px}.checkrow input{width:22px;height:22px;margin-top:2px;accent-color:#829879}.done{text-decoration:line-through;color:#8a8d83}.flash{background:linear-gradient(145deg,#f4e7e2,#e8d8d1);border-radius:22px;padding:24px;text-align:center;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px solid #fff}.flash .q{font-size:24px;font-weight:750;overflow-wrap:anywhere}.flash .a{font-size:18px;white-space:pre-wrap;overflow-wrap:anywhere}.timer{font-size:clamp(48px,14vw,72px);font-weight:800;letter-spacing:.02em;text-align:center;color:#5b506d;font-variant-numeric:tabular-nums;margin:15px 0}.timer-ring{border:8px solid #e4deec;border-top-color:#a69ab9;border-radius:50%;width:220px;height:220px;margin:12px auto;display:grid;place-items:center;background:#f6f3f8;box-shadow:inset 5px 5px 15px #fff,0 8px 20px #8a7c9c1c}.timer-ring .timer{margin:0}.footer{text-align:center;color:#8a8a7f;font-size:12px;padding:22px 0 8px}.hidden{display:none!important}.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:#344238;color:white;border-radius:99px;padding:11px 17px;font-size:14px;box-shadow:var(--shadow);z-index:20;max-width:90vw}
 @media(min-width:650px){.app{padding-top:30px}.nav button{font-size:14px}.cards{grid-template-columns:repeat(4,minmax(0,1fr))}.feature{min-height:165px}.panel{padding:24px}}
 @media(max-width:380px){.app{padding-left:11px;padding-right:11px}.backup-btn{font-size:12px;padding:9px}.nav{gap:4px}.nav button{font-size:11px}.nav button .emoji{font-size:20px}}
+
+/* 精簡首頁：首頁以卡片作為主要入口，其他頁面保留功能導覽列 */
+.home-active .nav{display:none}
+.home-active .app{padding-top:calc(8px + env(safe-area-inset-top));padding-bottom:8px}
+.home-active .top{gap:10px;margin:3px 0 10px}
+.home-active .brand-icon{width:48px;height:48px;flex:0 0 48px;border-radius:16px;padding:0;overflow:hidden;background:transparent;box-shadow:0 5px 12px #7c8b7040}
+.brand-icon img{display:block;width:100%;height:100%;object-fit:cover}
+.home-active .top h1{font-size:clamp(21px,5.6vw,27px)}
+.home-active .subtitle{font-size:13px;margin-top:2px}
+.home-active .backup-btn{font-size:12px;padding:8px 9px;border-radius:12px}
+.home-active .hero{padding:15px 16px;margin-bottom:11px;border-radius:23px}
+.home-active .hero h2{font-size:clamp(21px,5.5vw,27px);margin:5px 0}
+.home-active .hero p{font-size:14px}
+.home-active .progress-wrap{margin-top:10px}
+.home-active .progress-label{font-size:12px;margin-bottom:5px}
+.home-active .progress{height:7px}
+.home-active .cards{gap:9px}
+.home-active .feature{padding:11px 13px;min-height:94px;border-radius:18px}
+.home-active .feature .emoji{font-size:24px;margin-bottom:2px}
+.home-active .feature strong{font-size:16px;line-height:1.35}
+.home-active .feature small{font-size:12px;line-height:1.35;margin-top:2px}
+.home-active .panel{padding:12px 14px;margin-top:10px;border-radius:18px}
+.home-active .footer{display:none}
+.home-active .panel h2{font-size:18px;margin:0}
+.home-active .panel .hint{display:none}
+.home-active #recentNotes{margin-top:7px;gap:6px}
+.home-active #recentNotes .item{padding:8px 10px;border-radius:12px}
+.home-active #recentNotes .item-title{font-size:14px;line-height:1.3}
+.home-active #recentNotes .item-meta{font-size:11px;margin-top:2px}
+.home-active #recentNotes .item-body{display:none}
+.home-active #recentNotes .empty{padding:10px 8px;font-size:13px}
+/* 小螢幕避免首頁需要再滑動；功能頁仍可正常捲動 */
+@media(max-width:380px){
+ .home-active .app{padding-left:10px;padding-right:10px}
+ .home-active .top{margin-bottom:8px}
+ .home-active .brand-icon{width:44px;height:44px;flex-basis:44px}
+ .home-active .top h1{font-size:21px}
+ .home-active .backup-btn{font-size:11px;padding:7px 8px}
+ .home-active .hero{padding:13px 14px;margin-bottom:9px}
+ .home-active .hero h2{font-size:21px}
+ .home-active .hero p{font-size:13px}
+ .home-active .feature{min-height:87px;padding:9px 10px}
+ .home-active .feature .emoji{font-size:22px}
+ .home-active .feature strong{font-size:15px}
+ .home-active .feature small{font-size:11px}
+ .home-active .panel{padding:10px 12px;margin-top:8px}
+ .home-active #recentNotes .empty{font-size:12px}
+}
+@media(max-height:700px){
+ .home-active .app{padding-top:calc(5px + env(safe-area-inset-top))}
+ .home-active .hero{padding-top:11px;padding-bottom:11px}
+ .home-active .feature{min-height:80px}
+ .home-active .panel{margin-top:7px}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
   <header class="top">
-    <div class="brand-icon" aria-hidden="true">🌱</div>
+    <div class="brand-icon" aria-hidden="true"><img src="./icon.png" alt=""></div>
     <div><h1>我的知識花園</h1><div class="subtitle">收集知識，慢慢成長。</div></div>
     <button class="backup-btn" id="exportTop">備份資料</button>
   </header>
@@ -52,11 +112,6 @@
       <section class="panel">
         <h2>最近的知識種子 🌱</h2><p class="hint">新增的筆記會在這裡顯示。</p>
         <div id="recentNotes" class="list"></div>
-      </section>
-      <section class="panel">
-        <h2>今日學習清單</h2><p class="hint">用小小的完成，累積長期的進步。</p>
-        <div id="homeTasks" class="list"></div>
-        <button class="secondary" style="margin-top:12px" data-goto="daily">管理今日任務</button>
       </section>
     </section>
 
@@ -132,11 +187,11 @@
   function toast(msg){const t=$('toast');t.textContent=msg;t.classList.remove('hidden');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.add('hidden'),2600)}
   function fmtDate(s){try{return new Date(s).toLocaleDateString('zh-TW',{month:'short',day:'numeric'})}catch{return ''}}
   function ensureDay(){if(data.taskDate!==today()){data.tasks=[];data.taskDate=today();save()}}
-  function go(page){document.querySelectorAll('main>section').forEach(s=>s.classList.toggle('hidden',s.id!==`page-${page}`));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='notes')renderNotes();if(page==='daily')renderTasks();if(page==='cards')renderCards();if(page==='home')renderHome();window.scrollTo({top:0,behavior:'smooth'})}
+  function go(page){document.body.classList.toggle('home-active',page==='home');document.querySelectorAll('main>section').forEach(s=>s.classList.toggle('hidden',s.id!==`page-${page}`));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='notes')renderNotes();if(page==='daily')renderTasks();if(page==='cards')renderCards();if(page==='home')renderHome();window.scrollTo({top:0,behavior:'smooth'})}
   document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
   document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.goto)));
   function updateProgress(){ensureDay();const total=data.tasks.length,done=data.tasks.filter(t=>t.done).length;$('progressText').textContent=`${done} / ${total}`;$('progressBar').style.width=total?`${done/total*100}%`:'0%';$('todayLabel').textContent=`${new Date().toLocaleDateString('zh-TW',{weekday:'long',month:'long',day:'numeric'})} · 今日學習`}
-  function renderHome(){updateProgress();const recent=[...data.notes].sort((a,b)=>b.updated-a.updated).slice(0,3);$('recentNotes').innerHTML=recent.length?recent.map(n=>`<div class="item"><div class="item-title">${esc(n.title)}</div><div class="item-meta">${esc(n.category)} · ${fmtDate(n.updated)}</div>${safeUrl(n.url||'')?`<div style="margin-top:6px"><a href="${esc(safeUrl(n.url))}" target="_blank" rel="noopener noreferrer">↗ 開啟收藏連結</a></div>`:''}<div class="item-body">${esc((n.body||'').slice(0,110))}${(n.body||'').length>110?'…':''}</div></div>`).join(''):'<div class="empty">還沒有筆記，先種下第一顆知識種子吧 🌱</div>';const tasks=data.tasks.slice(0,4);$('homeTasks').innerHTML=tasks.length?tasks.map(t=>`<div class="item checkrow"><input type="checkbox" data-task="${t.id}" ${t.done?'checked':''} aria-label="完成任務"><div class="${t.done?'done':''}">${esc(t.title)}</div></div>`).join(''):'<div class="empty">今天還沒有任務，替自己設定一個小目標吧。</div>';bindTaskChecks()}
+  function renderHome(){updateProgress();const recent=[...data.notes].sort((a,b)=>b.updated-a.updated).slice(0,1);$('recentNotes').innerHTML=recent.length?recent.map(n=>`<div class="item"><div class="item-title">${esc(n.title)}</div><div class="item-meta">${esc(n.category)} · ${fmtDate(n.updated)}${safeUrl(n.url||'')?' · 含收藏連結':''}</div></div>`).join(''):'<div class="empty">尚無收藏，從知識筆記新增第一筆吧 🌱</div>'}
   function bindTaskChecks(){document.querySelectorAll('[data-task]').forEach(c=>c.addEventListener('change',()=>{const t=data.tasks.find(t=>t.id===c.dataset.task);if(t)t.done=c.checked;save();renderHome();if(!$('page-daily').classList.contains('hidden'))renderTasks()}))}
   function renderNotes(){const q=$('noteSearch').value.trim().toLowerCase();const notes=[...data.notes].filter(n=>[n.title,n.body,n.category,n.url].some(v=>(v||'').toLowerCase().includes(q))).sort((a,b)=>b.updated-a.updated);$('notesList').innerHTML=notes.length?notes.map(n=>`<article class="item"><div class="item-title">${esc(n.title)}</div><div class="item-meta">${esc(n.category)} · 更新於 ${fmtDate(n.updated)}</div>${safeUrl(n.url||'')?`<div style="margin-top:7px"><a href="${esc(safeUrl(n.url))}" target="_blank" rel="noopener noreferrer">↗ 開啟原始文章／YouTube 影片</a></div>`:''}<div class="item-body">${esc(n.body||'（沒有內文）')}</div><div class="item-actions"><button class="secondary" data-edit-note="${n.id}">編輯</button><button class="danger" data-delete-note="${n.id}">刪除</button></div></article>`).join(''):'<div class="empty">沒有找到筆記。可以新增一則，或換個關鍵字搜尋。</div>';document.querySelectorAll('[data-edit-note]').forEach(b=>b.onclick=()=>editNote(b.dataset.editNote));document.querySelectorAll('[data-delete-note]').forEach(b=>b.onclick=()=>{if(confirm('確定刪除這則筆記？此操作無法自動復原。')){data.notes=data.notes.filter(n=>n.id!==b.dataset.deleteNote);save();renderNotes();renderHome();toast('筆記已刪除')}})}
   function resetNoteForm(){$('noteForm').reset();editingNote=null;$('noteSubmit').textContent='儲存筆記';$('noteCancel').classList.add('hidden')}
@@ -156,8 +211,9 @@
   function download(name,content,type='application/json'){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
   function exportData(){download(`knowledge-garden-backup-${today()}.json`,JSON.stringify({...data,exportedAt:new Date().toISOString(),schemaVersion:1},null,2));toast('備份檔已匯出，請妥善保存。')}
   $('exportTop').onclick=exportData;
-  const imp=document.createElement('button');imp.className='secondary';imp.textContent='還原備份';imp.style.marginTop='10px';imp.onclick=()=>$('importFile').click();document.querySelector('#page-home .panel').appendChild(imp);
+  const imp=document.createElement('button');imp.className='secondary';imp.textContent='還原 JSON 備份';imp.onclick=()=>$('importFile').click();imp.style.marginTop='8px';document.querySelector('.footer').appendChild(document.createElement('br'));document.querySelector('.footer').appendChild(imp);
   $('importFile').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{const parsed=JSON.parse(await f.text());if(!parsed||!Array.isArray(parsed.notes)||!Array.isArray(parsed.tasks)||!Array.isArray(parsed.cards))throw new Error('格式不符');if(!confirm('匯入備份會以備份檔內容取代目前資料。建議先匯出目前資料。確定繼續？'))return;data={...initial(),...parsed,taskDate:parsed.taskDate||today()};save();renderHome();toast('備份已還原');go('home')}catch{toast('無法讀取備份檔，請選擇本 App 匯出的 JSON 檔。')}finally{e.target.value=''}});
+  document.body.classList.add('home-active');
   $('focusTotal').textContent=`${data.focusMinutes||0} 分鐘`;drawTimer();ensureDay();renderHome();
 })();
 </script>
